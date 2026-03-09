@@ -1,151 +1,234 @@
 <!DOCTYPE html>
 <html lang="pt-PT">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CleanHouse - Limpezas Profissionais</title>
-<style>
-/* Reset e base */
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family: 'Segoe UI', Arial, sans-serif; background:#f0f2f5; color:#333; line-height:1.6; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="CleanHouse - Limpeza profissional em Leiria: Pós-obra, Profunda, Agendamento rápido e Empresarial/Escritórios.">
+    <title>CleanHouse - Limpeza Profissional em Leiria</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; line-height:1.6; color:#333; background:#fff; overflow-x:hidden; }
 
-header { background:#0056b3; color:white; padding:60px 20px; text-align:center; }
-header h1 { font-size:3rem; margin-bottom:10px; }
-header p { font-size:1.2rem; }
+        /* Animações */
+        @keyframes fadeInUp { from {opacity:0; transform:translateY(30px);} to {opacity:1; transform:translateY(0);} }
+        @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+        .fade-in { opacity:0; animation: fadeInUp 0.8s ease-out forwards; }
+        .fade-in.visible { opacity:1; }
 
-nav { text-align:center; margin-top:20px; }
-nav a { color:white; margin:0 15px; text-decoration:none; font-weight:600; }
-nav a:hover { text-decoration:underline; }
+        /* Header */
+        header { background: linear-gradient(90deg,#4DA6D6 0%,#5BB5DB 100%); color:white; padding:16px 0; position:sticky; top:0; z-index:100; box-shadow:0 2px 8px rgba(77,166,214,0.15); }
+        .header-content { max-width:1200px; margin:0 auto; padding:0 20px; display:flex; justify-content:space-between; align-items:center; height:60px; }
+        .logo { font-size:20px; font-weight:800; color:#fff; display:flex; align-items:center; gap:10px; }
+        nav { display:flex; gap:35px; }
+        nav a { color:white; text-decoration:none; font-weight:500; font-size:13px; text-transform:uppercase; transition:opacity 0.3s; }
+        nav a:hover { opacity:0.8; }
 
-main { max-width:1100px; margin:40px auto; padding:0 20px; }
+        /* Hero */
+        .hero { background: linear-gradient(135deg,#5BB5DB 0%,#4DA6D6 50%,#3D8FC8 100%); color:white; padding:60px 20px; display:flex; justify-content:center; align-items:center; min-height:calc(100vh - 60px);}
+        .hero-content { display:grid; grid-template-columns:1fr 1fr; max-width:1200px; gap:60px; align-items:center; }
+        .hero-text h1 { font-size:clamp(28px,6vw,48px); margin-bottom:20px; font-weight:700; line-height:1.3; }
+        .hero-text p { font-size:clamp(14px,3vw,16px); margin-bottom:40px; line-height:1.7; }
+        .cta-button { background:white; color:#4DA6D6; padding:12px 40px; border-radius:50px; font-weight:700; text-transform:uppercase; border:none; cursor:pointer; transition:all 0.3s ease; }
+        .cta-button:hover { transform:translateY(-2px); background:#f0f0f0; }
 
-section { margin-bottom:60px; }
+        .hero-image img { width:100%; height:auto; border-radius:8px; object-fit:cover; }
 
-h2 { color:#0056b3; margin-bottom:30px; text-align:center; font-size:2.2rem; }
+        /* Seções */
+        section { padding:60px 20px; }
+        h2 { font-size:clamp(28px,6vw,42px); text-align:center; color:#1a1a2e; font-weight:900; margin-bottom:60px; }
+        .container { max-width:1200px; margin:0 auto; }
 
-p { margin-bottom:15px; }
+        /* Serviços */
+        .servicos-cards-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:30px; }
+        .servico-card { background:white; padding:30px; border-radius:6px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,0.06); transition:all 0.3s; border:1px solid #f0f0f0; opacity:0; }
+        .servico-card:hover { transform:translateY(-8px); box-shadow:0 12px 30px rgba(0,0,0,0.1); }
+        .servico-card img { width:100%; height:180px; object-fit:cover; border-radius:6px; margin-bottom:20px; }
+        .servico-card h3 { color:#1a1a2e; font-size:22px; font-weight:800; margin-bottom:18px; }
+        .servico-card p { color:#666; font-size:14px; line-height:1.6; margin-bottom:20px; }
+        .servico-card button { width:100%; background:#4DA6D6; color:white; padding:12px; border:none; border-radius:4px; font-weight:700; cursor:pointer; }
+        .servico-card button:hover { background:#3D8FC8; }
 
-.services { display:flex; justify-content:space-between; flex-wrap:wrap; gap:20px; margin-top:30px; }
-.service-card { background:white; padding:25px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.1); flex:1; min-width:280px; text-align:center; transition: transform 0.3s; }
-.service-card:hover { transform: translateY(-5px); }
-.service-card h3 { margin-bottom:15px; color:#0056b3; }
+        /* Contacto */
+        .contacto-info { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:50px; margin-top:60px; }
+        .info-item { text-align:center; opacity:0; }
+        .info-item h3 { color:#4DA6D6; margin-bottom:13px; font-size:15px; font-weight:800; text-transform:uppercase; }
 
-.form-container { background:white; padding:35px; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,0.1); max-width:650px; margin:0 auto; }
+        /* Footer */
+        footer { background:#1a1a2e; color:white; padding:30px 20px; text-align:center; border-top:1px solid #2a2a3e; }
+        footer p { font-size:13px; opacity:0.7; }
 
-label { display:block; margin-top:15px; font-weight:600; color:#555; }
-input[type="text"], input[type="email"], textarea, select { width:100%; padding:12px; margin-top:5px; border:1px solid #ccc; border-radius:8px; font-size:16px; }
-textarea { resize:vertical; }
+        /* Modal */
+        .modal { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background-color:rgba(0,0,0,0.6); overflow-y:auto; padding:20px 0; }
+        .modal-content { background:white; margin:40px auto; padding:40px; border-radius:6px; max-width:500px; box-shadow:0 25px 60px rgba(0,0,0,0.2); }
+        .close { float:right; font-size:26px; font-weight:bold; cursor:pointer; }
+        .form-group { margin-bottom:22px; }
+        .form-group label { display:block; margin-bottom:8px; font-weight:700; text-transform:uppercase; font-size:13px; }
+        .form-group input, .form-group textarea, .form-group select { width:100%; padding:12px; border:1px solid #ddd; border-radius:4px; font-size:14px; }
+        .submit-btn { width:100%; background:#4DA6D6; color:white; padding:13px; border:none; border-radius:4px; font-weight:700; cursor:pointer; text-transform:uppercase; }
+        .submit-btn:hover { background:#3D8FC8; }
 
-.radio-group { margin-top:10px; }
-.radio-group label { font-weight:normal; margin-right:15px; }
-
-button { width:100%; padding:14px; margin-top:25px; background:#0056b3; border:none; border-radius:8px; color:white; font-size:18px; cursor:pointer; transition:0.3s; }
-button:hover { background:#003f7f; }
-
-.contact-info { text-align:center; margin-top:20px; font-size:1rem; }
-.contact-info a { color:#0056b3; text-decoration:none; margin:0 10px; font-weight:600; }
-.contact-info a:hover { text-decoration:underline; }
-
-footer { text-align:center; padding:20px 0; background:#e8e8e8; font-size:14px; color:#555; }
-
-.whatsapp-button { position:fixed; bottom:20px; right:20px; background:#25D366; color:white; border-radius:50%; width:50px; height:50px; display:flex; justify-content:center; align-items:center; font-size:24px; text-decoration:none; box-shadow:0 4px 10px rgba(0,0,0,0.2); }
-.whatsapp-button:hover { background:#1ebe57; }
-
-@media(max-width:768px){
-    .services { flex-direction:column; align-items:center; }
-    .radio-group label { display:block; margin-bottom:10px; }
-}
-</style>
+        /* Responsivo */
+        @media(max-width:768px){ .hero-content { grid-template-columns:1fr; gap:40px; } nav { display:none; } }
+    </style>
 </head>
 <body>
 
-<header>
-    <h1>CleanHouse</h1>
-    <p>Limpezas Profissionais de Casas, Pós-Obra e Agendamentos Mensais</p>
-    <nav>
-        <a href="#sobre">Sobre Nós</a>
-        <a href="#servicos">Serviços</a>
-        <a href="#orcamento">Orçamento</a>
-        <a href="#contacto">Contacto</a>
-    </nav>
-</header>
-
-<main>
-<section id="sobre">
-    <h2>Sobre Nós</h2>
-    <p>A CleanHouse garante serviços de limpeza com qualidade, profissionalismo e confiança. Mantemos sua casa sempre limpa e organizada, sem complicações.</p>
-</section>
-
-<section id="servicos">
-    <h2>Nossos Serviços</h2>
-    <div class="services">
-        <div class="service-card">
-            <h3>Limpeza Profunda</h3>
-            <p>Limpeza completa de cada canto da sua casa, garantindo higiene e organização total.</p>
-        </div>
-        <div class="service-card">
-            <h3>Limpeza Pós-Obra</h3>
-            <p>Remoção de pó e resíduos de construção para deixar seu espaço pronto para uso.</p>
-        </div>
-        <div class="service-card">
-            <h3>Agendamento Mensal</h3>
-            <p>Serviço periódico para manter a limpeza de forma prática e constante.</p>
-        </div>
-    </div>
-</section>
-
-<section id="orcamento">
-    <h2>Pedir Orçamento</h2>
-    <div class="form-container">
-        <form action="https://formspree.io/f/xjgavlvq" method="POST">
-            <label for="name">Nome:</label>
-            <input type="text" id="name" name="name" placeholder="O seu nome" required>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="_replyto" placeholder="O seu email" required>
-
-            <label>Tipo de Limpeza:</label>
-            <div class="radio-group">
-                <label><input type="radio" name="tipo_limpeza" value="Limpeza Profunda" required> Limpeza Profunda</label>
-                <label><input type="radio" name="tipo_limpeza" value="Limpeza Pós-Obra"> Limpeza Pós-Obra</label>
-                <label><input type="radio" name="tipo_limpeza" value="Agendamento Mensal"> Agendamento Mensal</label>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                CleanHouse Leiria
             </div>
+            <nav>
+                <a href="#servicos">Serviços</a>
+                <a href="#contacto">Contacto</a>
+            </nav>
+        </div>
+    </header>
 
-            <label for="agendamento">Frequência de Agendamento:</label>
-            <select id="agendamento" name="agendamento" required>
-                <option value="">Escolha uma opção</option>
-                <option value="Semanal">Semanal</option>
-                <option value="Quinzenal">Quinzenal</option>
-                <option value="Mensal">Mensal</option>
-                <option value="Sob demanda">Sob demanda</option>
-            </select>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Limpeza <span class="highlight">Profissional</span></h1>
+                <p>A CleanHouse oferece soluções de limpeza abrangentes, eficientes e profissionais para todos os tipos de necessidades.</p>
+                <button class="cta-button" onclick="abrirModal()">PEDIR ORÇAMENTO GRÁTIS</button>
+            </div>
+            <div class="hero-image" id="heroImage">
+                <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=500&h=500&fit=crop" alt="Serviços de limpeza profissional">
+            </div>
+        </div>
+    </section>
 
-            <label for="message">Observações:</label>
-            <textarea id="message" name="message" rows="4" placeholder="Detalhes adicionais..." required></textarea>
+    <!-- Serviços -->
+    <section class="servicos" id="servicos">
+        <div class="container">
+            <h2>Os Nossos Serviços</h2>
+            <div class="servicos-cards-grid">
 
-            <input type="hidden" name="_next" value="obrigado.html">
+                <div class="servico-card fade-in">
+                    <img src="https://images.unsplash.com/photo-1612874742823-5d2f9d1c8922?w=500&h=300&fit=crop" alt="Limpeza Pós-Obra">
+                    <h3>Limpeza Pós-Obra</h3>
+                    <p>Remoção completa de poeira e resíduos após obras, garantindo um espaço limpo e pronto para uso.</p>
+                    <button onclick="abrirModalComServico('Limpeza Pós-Obra', 'https://images.unsplash.com/photo-1612874742823-5d2f9d1c8922?w=500&h=500&fit=crop')">Orçamento</button>
+                </div>
 
-            <button type="submit">Enviar Pedido</button>
-        </form>
+                <div class="servico-card fade-in">
+                    <img src="https://images.unsplash.com/photo-1581579182760-d7c0a3cb71a4?w=500&h=300&fit=crop" alt="Limpeza Profunda">
+                    <h3>Limpeza Profunda</h3>
+                    <p>Limpeza detalhada de todos os cantos e superfícies, removendo sujidade acumulada e ácaros.</p>
+                    <button onclick="abrirModalComServico('Limpeza Profunda', 'https://images.unsplash.com/photo-1581579182760-d7c0a3cb71a4?w=500&h=500&fit=crop')">Orçamento</button>
+                </div>
+
+                <div class="servico-card fade-in">
+                    <img src="https://images.unsplash.com/photo-1612832021272-2b2c07ff0baf?w=500&h=300&fit=crop" alt="Agendamento Rápido">
+                    <h3>Agendamento Rápido</h3>
+                    <p>Marque o seu serviço de limpeza de forma rápida e prática, sem complicações e com flexibilidade.</p>
+                    <button onclick="abrirModalComServico('Agendamento', 'https://images.unsplash.com/photo-1612832021272-2b2c07ff0baf?w=500&h=500&fit=crop')">Orçamento</button>
+                </div>
+
+                <div class="servico-card fade-in">
+                    <img src="https://images.unsplash.com/photo-1581091012184-3b3f1b489b4b?w=500&h=300&fit=crop" alt="Empresarial e Escritórios">
+                    <h3>Empresarial e Escritórios</h3>
+                    <p>Serviços especializados para empresas, garantindo escritórios limpos e um ambiente de trabalho agradável.</p>
+                    <button onclick="abrirModalComServico('Empresarial e Escritórios', 'https://images.unsplash.com/photo-1581091012184-3b3f1b489b4b?w=500&h=500&fit=crop')">Orçamento</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section class="contacto" id="contacto">
+        <div class="container">
+            <h2>Entre em Contacto</h2>
+            <div class="contacto-info">
+                <div class="info-item fade-in">
+                    <h3>Telefone</h3>
+                    <p><a href="tel:+351928379963" style="color:#666;text-decoration:none;">+351 928 379 963</a></p>
+                </div>
+                <div class="info-item fade-in">
+                    <h3>Email</h3>
+                    <p><a href="mailto:cleanhouselimpezasdoliz@gmail.com" style="color:#666;text-decoration:none;">cleanhouselimpezasdoliz@gmail.com</a></p>
+                </div>
+                <div class="info-item fade-in">
+                    <h3>Localização</h3>
+                    <p>Leiria, Portugal</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 CleanHouse. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Modal -->
+    <div id="modalOrcamento" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="fecharModal()">&times;</span>
+            <h2>Pedir Orçamento</h2>
+            <form action="https://formspree.io/f/xjgavlvq" method="POST">
+                <div class="form-group">
+                    <label for="nome">Nome *</label>
+                    <input type="text" id="nome" name="nome" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="telefone">Telefone *</label>
+                    <input type="tel" id="telefone" name="telefone" required>
+                </div>
+                <div class="form-group">
+                    <label for="servico">Serviço *</label>
+                    <input type="text" id="servico" name="servico" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="area">Área Aproximada (m²) *</label>
+                    <input type="number" id="area" name="area" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="mensagem">Detalhes</label>
+                    <textarea id="mensagem" name="mensagem" placeholder="Descreva suas necessidades..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Enviar</button>
+            </form>
+        </div>
     </div>
-</section>
 
-<section id="contacto">
-    <h2>Contacto</h2>
-    <div class="contact-info">
-        <p>Telefone: <a href="tel:+351928379963">928 379 963</a></p>
-        <p>Email: <a href="mailto:cleanhouselimpezasdoliz@gmail.com">cleanhouselimpezasdoliz@gmail.com</a></p>
-        <p>Facebook: <a href="https://www.facebook.com/profile.php?id=61575062108966&sk=directory_contact_info" target="_blank">Visitar Página</a></p>
-    </div>
-</section>
+    <script>
+        const heroImage = document.getElementById('heroImage').querySelector('img');
 
-</main>
+        function abrirModal(){document.getElementById("modalOrcamento").style.display="block"; document.body.style.overflow="hidden";}
+        function fecharModal(){document.getElementById("modalOrcamento").style.display="none"; document.body.style.overflow="auto";}
+        window.onclick=function(e){if(e.target==document.getElementById("modalOrcamento"))fecharModal();}
+        document.addEventListener('keydown', function(e){if(e.key==='Escape') fecharModal();});
 
-<a href="https://wa.me/351928379963" class="whatsapp-button" target="_blank" title="Chatear no WhatsApp">💬</a>
+        function abrirModalComServico(servico, imgSrc){
+            document.getElementById("servico").value = servico;
+            heroImage.src = imgSrc;
+            abrirModal();
+        }
 
-<footer>
-    &copy; 2026 CleanHouse - Todos os direitos reservados
-</footer>
+        // Fade-in
+        const observer = new IntersectionObserver((entries)=>{
+            entries.forEach(e=>{
+                if(e.isIntersecting){
+                    e.target.classList.add('visible');
+                    observer.unobserve(e.target);
+                }
+            })
+        }, {threshold:0.1});
+        document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+    </script>
 
+</body>
+</html>
 </body>
 </html>
